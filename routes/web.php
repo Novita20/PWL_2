@@ -7,7 +7,9 @@ use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ContactUsController;
+use App\Http\Controllers\ExperienceController;
 use App\Http\Controllers\AboutUsController;
+use App\Http\Controllers\ProfilController;
 
 // use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
@@ -36,29 +38,43 @@ use Illuminate\Support\Facades\Route;
 // });
 
 
-// Route::get('/', [HomeController::class, 'index']);
-//  Route::get('/about', [AboutController::class, 'index']);
-//  Route::get('/article/{id}', [ArticleController::class, 'index']);
+
+Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
+Route::get('/ex', [ExperienceController::class, 'index'])->name('pengalaman');
+Route::get('/profil', [ProfilController::class, 'index'])->name('profil');
+// Route::get('/', [PengalamanController::class, 'index'])->name('pengalaman');
+
+
+
+ Route::get('/about', [AboutController::class, 'index']);
+ Route::get('/article/{id}', [ArticleController::class, 'index']);
  
-//  Route::prefix('product')->group(function () {
-//           Route::get('/', [ProductController::class, 'index']);
-//           Route::get('/marbel-edu-game', fn()=>"Marbel-edu-game");
-//           Route::get('/marbel-and-friends-kids-games', fn()=>"marbel-and-friends-kids-games");
-//           Route::get('/riri-story-books', fn()=>"riri-story-books");
-//           Route::get('/kolak-kids-songs', fn()=>"kolak-kids-songs");
-    
-//       });
+ Route::prefix('products')->group(function(){
+    Route::get('/', [ProductController::class, 'index']);
+    Route::get('/marbel-edu-games', function (){
+        return "Marbel Edu Games";
+     });
+    Route::get('/marbel-and-friends-kids-games', function (){
+        return "Marbel and Friends Kids Games";
+    });
+   Route::get('/riri-story-books', function (){
+        return "Riri Story Books";
+    });
+    Route::get('/kolak-kids-songs', function (){
+        return "Kolak Kids Songs";
+    });
+ });
 
-// Route::get('/', [HomeController::class,'index']);
+Route::get('/', [HomeController::class,'index']);
 
-    //  Route::get('/news', [NewsController::class, 'index']);
-    //  Route::get('/news/{news}', [NewsController::class, 'x']);
+     Route::get('/news', [NewsController::class, 'index']);
+     Route::get('/news/{news}', [NewsController::class, 'x']);
 
-    //    Route::prefix('program')->group(function() {
-    //        Route::get('/', [ProgramController::class, 'index']);
-    //        Route::get('/karir', [ProgramController::class, 'kr']);
-    //        Route::get('/magang', [ProgramController::class, 'mg']);
-    //        Route::get('/kunjungan-industri', [ProgramController::class, 'ki']);
-    //   });
-    //  Route::get("/about-us", [AboutUsController::class, 'xy']);
-     Route::get("/contactus", [ContactUsController::class, 'contactus']);
+       Route::prefix('program')->group(function() {
+           Route::get('/', [ProgramController::class, 'index']);
+           Route::get('/karir', [ProgramController::class, 'kr']);
+           Route::get('/magang', [ProgramController::class, 'mg']);
+           Route::get('/kunjungan-industri', [ProgramController::class, 'ki']);
+      });
+     Route::get("/about-us", [AboutUsController::class, 'xy']);
+    Route::get("/contactus", [ContactUsController::class, 'contactus']);

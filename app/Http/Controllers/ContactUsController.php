@@ -13,11 +13,7 @@ class ContactUsController extends Controller
      */
     public function contactus()
     {
-        return 'Thankyou<br>
-        <ul>
-        <li>Instagram: nvtdwirahma</li>
-        <li>WA: 08111111111</li>
-        </ul>';
+        return view("prak1.contact-us");
     }
 
     /**
