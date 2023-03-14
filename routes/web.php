@@ -9,8 +9,13 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\ExperienceController;
 use App\Http\Controllers\AboutUsController;
+use App\Http\Controllers\ArtikelModelController;
+use App\Http\Controllers\HobiController;
+use App\Http\Controllers\HobiModelController;
+use App\Http\Controllers\KeluargaModelController;
 use App\Http\Controllers\ProfilController;
-
+use App\Http\Controllers\MataKuliahController;
+use App\Http\Controllers\MataKuliahModelController;
 // use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
 
@@ -42,6 +47,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
 Route::get('/ex', [ExperienceController::class, 'index'])->name('pengalaman');
 Route::get('/profil', [ProfilController::class, 'index'])->name('profil');
+Route::get("/hobi", [HobiModelController::class, 'index'])->name('hobi');
+Route::get("/kel", [KeluargaModelController::class, 'index'])->name('kel');
+Route::get("/mk", [MataKuliahModelController::class, 'index'])->name('mk');
+
+
+
 // Route::get('/', [PengalamanController::class, 'index'])->name('pengalaman');
 
 
@@ -50,8 +61,8 @@ Route::get('/profil', [ProfilController::class, 'index'])->name('profil');
  Route::get('/article/{id}', [ArticleController::class, 'index']);
  
  Route::prefix('products')->group(function(){
-    Route::get('/', [ProductController::class, 'index']);
-    Route::get('/marbel-edu-games', function (){
+ Route::get('/', [ProductController::class, 'index']);
+ Route::get('/marbel-edu-games', function (){
         return "Marbel Edu Games";
      });
     Route::get('/marbel-and-friends-kids-games', function (){
@@ -64,17 +75,19 @@ Route::get('/profil', [ProfilController::class, 'index'])->name('profil');
         return "Kolak Kids Songs";
     });
  });
-
-Route::get('/', [HomeController::class,'index']);
-
+     Route::get('/', [HomeController::class,'index']);
      Route::get('/news', [NewsController::class, 'index']);
      Route::get('/news/{news}', [NewsController::class, 'x']);
 
-       Route::prefix('program')->group(function() {
-           Route::get('/', [ProgramController::class, 'index']);
-           Route::get('/karir', [ProgramController::class, 'kr']);
-           Route::get('/magang', [ProgramController::class, 'mg']);
-           Route::get('/kunjungan-industri', [ProgramController::class, 'ki']);
+     Route::prefix('program')->group(function() {
+     Route::get('/', [ProgramController::class, 'index']);
+     Route::get('/karir', [ProgramController::class, 'kr']);
+     Route::get('/magang', [ProgramController::class, 'mg']);
+     Route::get('/kunjungan-industri', [ProgramController::class, 'ki']);
       });
+
      Route::get("/about-us", [AboutUsController::class, 'xy']);
-    Route::get("/contactus", [ContactUsController::class, 'contactus']);
+     Route::get("/contactus", [ContactUsController::class, 'contactus']);
+     Route::get('/artikel_models', [ArtikelModelController::class, 'index']);
+
+    ?>
