@@ -10,12 +10,16 @@ use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\ExperienceController;
 use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\ArtikelModelController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\HobiController;
 use App\Http\Controllers\HobiModelController;
 use App\Http\Controllers\KeluargaModelController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\MataKuliahController;
 use App\Http\Controllers\MataKuliahModelController;
+
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 // use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
 
@@ -41,7 +45,6 @@ use Illuminate\Support\Facades\Route;
 // Route:: get('/articles/{id}', function ($id){
 //     echo "Halaman Artikel dengan ID " . $id;
 // });
-
 
 
 Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
@@ -90,4 +93,20 @@ Route::get("/mk", [MataKuliahModelController::class, 'index'])->name('mk');
      Route::get("/contactus", [ContactUsController::class, 'contactus']);
      Route::get('/artikel_models', [ArtikelModelController::class, 'index']);
 
-    ?>
+     
+Auth::routes(); 
+Route::get('logout', [LoginController::class, 'logout']); 
+
+Route::get('/tes', function(){
+    echo Hash::make('1').'<br>';
+    echo Hash::make('1') . '<br>';
+    echo Hash::make('1') . '<br>'; 
+});
+
+Route::middleware(['auth'])->group(function(){
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
+    Route::get('/article/{id}', [ArticleController::class, 'index']);
+    Route::get("/hobi", [HobiModelController::class, 'index'])->name('hobi');
+    Route::get("/kel", [KeluargaModelController::class, 'index'])->name('kel');
+    Route::get("/mk", [MataKuliahModelController::class, 'index'])->name('mk');
+    });
