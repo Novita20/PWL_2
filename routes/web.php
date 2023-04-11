@@ -14,9 +14,10 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\HobiController;
 use App\Http\Controllers\HobiModelController;
 use App\Http\Controllers\KeluargaModelController;
+use App\Http\Controllers\MahasiswaController;
+// use App\Http\Controllers\MahasiswaModelController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\MataKuliahController;
-use App\Http\Controllers\MataKuliahModelController;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -47,12 +48,6 @@ use Illuminate\Support\Facades\Route;
 // });
 
 
-Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
-Route::get('/ex', [ExperienceController::class, 'index'])->name('pengalaman');
-Route::get('/profil', [ProfilController::class, 'index'])->name('profil');
-Route::get("/hobi", [HobiModelController::class, 'index'])->name('hobi');
-Route::get("/kel", [KeluargaModelController::class, 'index'])->name('kel');
-Route::get("/mk", [MataKuliahModelController::class, 'index'])->name('mk');
 
 
 
@@ -104,9 +99,19 @@ Route::get('/tes', function(){
 });
 
 Route::middleware(['auth'])->group(function(){
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
     Route::get('/article/{id}', [ArticleController::class, 'index']);
-    Route::get("/hobi", [HobiModelController::class, 'index'])->name('hobi');
-    Route::get("/kel", [KeluargaModelController::class, 'index'])->name('kel');
-    Route::get("/mk", [MataKuliahModelController::class, 'index'])->name('mk');
+    Route::resource('/hobi', HobiModelController::class)->name('index','hobi');
+    Route::resource('/keluarga', KeluargaModelController::class)->parameter('keluarga','id')->name('index','kel');  
+    Route::resource('/matkul', MataKuliahController::class)->name('index','matkul');
+    
+
+    // Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
+    Route::get('/ex', [ExperienceController::class, 'index'])->name('pengalaman');
+    Route::get('/profil', [ProfilController::class, 'index'])->name('profil');
+    // Route::get("/hobi", [HobiModelController::class, 'index'])->name('hobi');
+    // Route::get("/kel", [KeluargaModelController::class, 'index'])->name('kel');
+    // Route::get("/mk", [MataKuliahModelController::class, 'index'])->name('mk');
     });
+
+

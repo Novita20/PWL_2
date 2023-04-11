@@ -9,6 +9,12 @@ class MataKuliahModel extends Model
 {
     use HasFactory;
     protected $table = 'MataKuliahModel';
-    protected $primaryKey = 'id';
-    protected $keyType = 'string';
+    public $timestamps = false;
+    protected $primary = 'id_matkul';
+    protected $keyType ='string';
+    protected $fillable=[
+        'kode_matkul',
+        'mataKuliah',
+        'pengajar',        
+    ];
 }

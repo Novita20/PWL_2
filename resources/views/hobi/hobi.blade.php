@@ -6,12 +6,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Mata Kuliah</h1>
+                    <h1>Hobi</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Mata Kuliah</li>
+                        <li class="breadcrumb-item active">Hobi</li>
                     </ol>
                 </div>
             </div>
@@ -24,7 +24,7 @@
         <!-- Default box -->
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">D-IV Teknik Informatika</h3>
+                <h3 class="card-title">Title</h3>
 
                 <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -36,19 +36,30 @@
                 </div>
             </div>
             <div class="card-body">
+            <a href="{{url('hobi/create')}}" class="btn btn-sm btn-success my-2">Tambah Data</a>
                 <table class="table">
                     <tr>
                         <th>id</th>
-                        <th>mataKuliah</th>
-                        <th>pengajar</th>
+                        <th>nama</th>
+                        <th>hobi</th>
+                        <th>action</th>
                         
                     </tr>
-                    @foreach ($mk as $id => $k)
+                    @foreach ($hobi as $id => $k)
                     <tr>
-                        <td>{{$id}}</td>
-                        <td>{{$k->mataKuliah}}</td>
-                        <td>{{$k->pengajar}}</td>
-                       
+                        <td>{{$k->id}}</td>
+                        <td>{{$k->nama}}</td>
+                        <td>{{$k->hobi}}</td>
+                    <td>
+                        <!-- Bikin tombol Edit dan Delete-->
+                        <a href="{{ url('/hobi/'. $k->id.'/edit') }}" class="btn btn-sm btn-warning">edit</a>
+  
+                        <form method="POST" action="{{ url('/hobi/'.$k->id) }}" >
+                          @csrf
+                          @method('DELETE')
+                          <button type="submit" class="btn btn-sm btn-danger">DELETE</button>
+                        </form>
+                       </td>
                     </tr>
                     @endforeach
                 </table>

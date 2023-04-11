@@ -14,9 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('MataKuliahModel', function (Blueprint $table) {
-            $table->string ('id', 4)->primary();
-            $table->string ('mataKuliah',30);
-            $table->string ('pengajar', 30);
+            $table->id ('id_matkul');
+            $table->string ('kode_matkul',5)->nullable();
+            $table->string ('mataKuliah',30)->nullable();
+            $table->string ('pengajar', 30)->nullable();
+            
            
         });
     }

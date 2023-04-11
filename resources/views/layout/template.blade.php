@@ -57,4 +57,4 @@
 <script src="{{asset('assets/dist/js/demo.js')}}"></script>
 @stack('custom.js')
 </body>
-</html>
+</html> 

@@ -6,12 +6,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Hobi</h1>
+                    <h1>Keluarga</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Hobi</li>
+                        <li class="breadcrumb-item active">Keluarga</li>
                     </ol>
                 </div>
             </div>
@@ -36,22 +36,40 @@
                 </div>
             </div>
             <div class="card-body">
-                <table class="table">
-                    <tr>
-                        <th>id</th>
-                        <th>nama</th>
-                        <th>hobi</th>
-                        
-                    </tr>
-                    @foreach ($hobi as $id => $k)
-                    <tr>
-                        <td>{{$id}}</td>
-                        <td>{{$k->nama}}</td>
-                        <td>{{$k->hobi}}</td>
-                       
-                    </tr>
-                    @endforeach
-                </table>
+            <a href="{{url('keluarga/create')}}" class="btn btn-sm btn-success my-2">Tambah Data</a>
+            <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th>id</th>
+                <th>nama</th>
+                <th>status</th>
+                <th>action</th>
+              </tr>
+            </thead>
+            <tbody>
+              @if($keluarga->count() > 0)
+               @foreach ($keluarga as $kg => $k)
+                  <tr>
+                    <td>{{++$kg}}</td>
+                    <td>{{$k->nama}}</td>
+                    <td>{{$k->status}}</td>
+                    <td>
+                      <!-- Bikin tombol edit dan delete -->
+                      <a href="{{ url('/keluarga/'. $k->id.'/edit') }}" class="btn btn-sm btn-warning">edit</a>
+
+                      <form method="POST" action="{{ url('/keluarga/'.$k->id) }}" >
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-sm btn-danger">hapus</button>
+                      </form>
+                    </td>
+                  </tr>
+                @endforeach
+              </table>
+              @else
+                <tr><td colspan="6" class="text-center">Data tidak ada</td></tr>
+              @endif
+            </tbody>
             </div>
             <!-- /.card-body -->
             <div class="card-footer">

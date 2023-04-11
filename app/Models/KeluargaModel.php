@@ -9,7 +9,13 @@ class KeluargaModel extends Model
 {
     use HasFactory;
     protected $table = 'KeluargaModel';
-    protected $primaryKey = 'id';
+    public $timestamps = false;
+    // protected $primaryKey = 'id';
     protected $keyType = 'string';
+    protected $fillable=[
+        'id',
+        'nama',
+        'status',
+    ];
 }
 

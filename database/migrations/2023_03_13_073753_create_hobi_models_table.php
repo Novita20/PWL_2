@@ -13,11 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('hobiModel', function (Blueprint $table) {
-            $table->string ('id', 4)->primary();
-            $table->string ('nama',50);
-            $table->string ('hobi', 50);
-           
+        Schema::create('hobi', function (Blueprint $table) {
+            $table->string('id', 15)->primary();
+            $table->string('nama', 30)->nullable();
+            $table->string('hobi', 30)->nullable();
+            $table->timestamps();
         });
     }
 
