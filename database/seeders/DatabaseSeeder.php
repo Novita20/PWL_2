@@ -2,9 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\TransaksiModel;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-
-use App\Models\HobiModel;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -17,9 +16,9 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-            // ArtikelModelSeeder::class
-            // HobiModelSeeder::class
-             MataKuliahModelSeeder::class
+            // TransaksiSeeder::class,
+            MobilSeeder::class,
         ]);
+
     }
 }

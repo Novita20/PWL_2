@@ -18,7 +18,7 @@ use App\Http\Controllers\MahasiswaController;
 // use App\Http\Controllers\MahasiswaModelController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\MataKuliahController;
-
+use App\Http\Controllers\MobilController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 // use App\Http\Controllers\PageController;
@@ -112,6 +112,7 @@ Route::middleware(['auth'])->group(function(){
     // Route::get("/hobi", [HobiModelController::class, 'index'])->name('hobi');
     // Route::get("/kel", [KeluargaModelController::class, 'index'])->name('kel');
     // Route::get("/mk", [MataKuliahModelController::class, 'index'])->name('mk');
+    Route::resource('/mobil', MobilController::class);
     });
 
 

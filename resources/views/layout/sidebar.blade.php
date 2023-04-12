@@ -92,6 +92,16 @@
                 </p>
               </a>
             </li>
+             </li>
+            <li class="nav-item">
+              <a href={{url('mobil')}} class="nav-link">
+                <i class="nav-icon fas fa-tachometer-alt"></i>
+                <p>
+                  Mobil
+                  {{-- <i class="right fas fa-angle-left"></i> --}}
+                </p>
+              </a>
+            </li>
           </ul>
         </nav>
         <!-- /.sidebar-menu -->
