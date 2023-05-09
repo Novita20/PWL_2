@@ -71,6 +71,7 @@
                       <!-- Bikin tombol edit dan delete -->
                       <a href="{{ url('/mahasiswa/'. $m->id.'/edit') }}" class="btn btn-sm btn-warning">edit</a>
                       <a href="{{ route('mahasiswa.show', [$m->id]) }}" class="btn btn-sm btn-info">show</a>
+                       <a href="{{ route('mahasiswamatakuliah.show', [$m->id]) }}" class="btn btn-sm btn-success mr-2">nilai</a>
 
                       <form method="POST" action="{{ url('/mahasiswa/'.$m->id) }}" >
                         @csrf
