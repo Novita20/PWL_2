@@ -54,6 +54,16 @@
                     @enderror
                 </div>
                 <div class="form-group">
+                    <label for="Kelas">Kelas</label>
+                    <select class="form-control" name="kelas_id">
+                     @foreach ($kelas as $kls)
+                         <option value="{{$kls->id}}" @if($kls->id == $mhs->kelas_id)
+                            @selected(true)
+                         @endif>{{$kls->nama_kelas}}</option>
+                     @endforeach
+                    </select>
+                </div>
+                <div class="form-group">
                     <label>Jenis Kelamin</label>
                     <input class="form-control @error('jk') is-invalid @enderror" value="{{ isset($mhs)? $mhs->jk :old('jk') }}" name="jk" type="text"/>
                     @error('jk')

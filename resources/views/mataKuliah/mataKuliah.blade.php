@@ -36,33 +36,37 @@
                 </div>
             </div>
             <div class="card-body">
-            <a href="{{url('mataKuliah/create')}}" class="btn btn-sm btn-success my-2">Tambah Data</a>
+            <a href="{{url('matkul/create')}}" class="btn btn-sm btn-success my-2">Tambah Data</a>
                 <table class="table">
                     <tr>
-                        <th>id</th>
-                        <th>mataKuliah</th>
-                        <th>pengajar</th>
+                        <th>No</th>
+                        <th>Mata Kuliah</th>
+                        <th>SKS</th>
+                        <th>Jam</th>
+                        <th>Semester</th>
                         <th>action</th>
-                       
+
                     </tr>
                     @foreach ($mk as $id => $k)
                     <tr>
                         <td>{{$k->id}}</td>
-                        <td>{{$k->mataKuliah}}</td>
-                        <td>{{$k->pengajar}}</td>
+                        <td>{{$k->nama_matkul}}</td>
+                        <td>{{$k->sks}}</td>
+                        <td>{{$k->jam}}</td>
+                        <td>{{$k->semester}}</td>
                         <td>
                         <!-- Bikin tombol edit dan delete -->
-                        <a href="{{ url('/mataKuliah/'. $k->id.'/edit') }}" class="btn btn-sm btn-warning">edit</a>
+                        <a href="{{ url('/matkul/'. $k->id.'/edit') }}" class="btn btn-sm btn-warning">edit</a>
 
-                        <form method="POST" action="{{ url('/mataKuliah/'.$k->id) }}" >
+                        <form method="POST" action="{{ url('/matkul/'.$k->id) }}" >
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-sm btn-danger">hapus</button>
                         </form>
                         </td>
                      </tr>
-                       
-                   
+
+
                     @endforeach
                 </table>
             </div>

@@ -45,10 +45,12 @@
                 <th>No</th>
                 <th>NIM</th>
                 <th>Nama</th>
-                <th>JK</th>
-                <th>Tempat_lahir</th>
-                <th>Tanggal_lahir</th>
+                <th>Kelas</th>
+                <th>Jenis Kelamin</th>
+                <th>Tempat lahir</th>
+                <th>Tanggal lahir</th>
                 <th>Alamat</th>
+                <th>Kelas</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -64,9 +66,11 @@
                     <td>{{$m->tanggal_lahir}}</td>
                     <td>{{$m->alamat}}</td>
                     <td>{{$m->hp}}</td>
+                    <td>{{$m->kelas !== null? $m->kelas->nama_kelas:'kosong'}}</td>
                     <td>
                       <!-- Bikin tombol edit dan delete -->
                       <a href="{{ url('/mahasiswa/'. $m->id.'/edit') }}" class="btn btn-sm btn-warning">edit</a>
+                      <a href="{{ route('mahasiswa.show', [$m->id]) }}" class="btn btn-sm btn-info">show</a>
 
                       <form method="POST" action="{{ url('/mahasiswa/'.$m->id) }}" >
                         @csrf

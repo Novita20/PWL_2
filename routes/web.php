@@ -57,7 +57,7 @@ use Illuminate\Support\Facades\Route;
 
  Route::get('/about', [AboutController::class, 'index']);
  Route::get('/article/{id}', [ArticleController::class, 'index']);
- 
+
  Route::prefix('products')->group(function(){
  Route::get('/', [ProductController::class, 'index']);
  Route::get('/marbel-edu-games', function (){
@@ -88,23 +88,24 @@ use Illuminate\Support\Facades\Route;
      Route::get("/contactus", [ContactUsController::class, 'contactus']);
      Route::get('/artikel_models', [ArtikelModelController::class, 'index']);
 
-     
-Auth::routes(); 
-Route::get('logout', [LoginController::class, 'logout']); 
+
+Auth::routes();
+Route::get('logout', [LoginController::class, 'logout']);
 
 Route::get('/tes', function(){
     echo Hash::make('1').'<br>';
     echo Hash::make('1') . '<br>';
-    echo Hash::make('1') . '<br>'; 
+    echo Hash::make('1') . '<br>';
 });
 
 Route::middleware(['auth'])->group(function(){
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
     Route::get('/article/{id}', [ArticleController::class, 'index']);
     Route::resource('/hobi', HobiModelController::class)->name('index','hobi');
-    Route::resource('/keluarga', KeluargaModelController::class)->parameter('keluarga','id')->name('index','kel');  
-    Route::resource('/matkul', MataKuliahController::class)->name('index','matkul');
-    
+    Route::resource('/keluarga', KeluargaModelController::class)->parameter('keluarga','id')->name('index','kel');
+    Route::resource('/matkul', MataKuliahController::class);
+    Route::resource('/mahasiswa', MahasiswaController::class)->name('index','mahasiswa');
+
 
     // Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
     Route::get('/ex', [ExperienceController::class, 'index'])->name('pengalaman');

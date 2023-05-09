@@ -12,21 +12,24 @@ class MataKuliahController extends Controller
     public function index()
     {
         $matkul = MataKuliahModel::all();
-        return view('tes.matkul', ['matkul' => $matkul]);
+        return view('mataKuliah.mataKuliah')
+        ->with('mk',$matkul);
+        // return view('mataKuliah.mataKuliah', ['matkul' => $matkul]);
     }
 
 
     public function create()
     {
-        return view('tes.create_matkul', ['urlform' => url('/matkul')]);
+        return view('mataKuliah.create_mataKuliah', ['url_form' => url('/matkul')]);
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'kode_matkul' => 'required|string|max:5',
-            'matakuliah' => 'required|string|max:30',
-            'pengajar' => 'required|string|max:30',
+            'nama_matkul' => 'required|string|max:30|unique:matakuliah,id,',
+            'sks' => 'required|integer',
+            'jam' => 'required|integer',
+            'semester' => 'required|string|max:12',
         ]);
 
         MataKuliahModel::create($request->except(['_token']));
@@ -34,18 +37,25 @@ class MataKuliahController extends Controller
             ->with('success', 'Mata Kuliah Berhasil Ditambahkan');
     }
 
+    public function show($id)
+    {
+        $matakuliah = MataKuliahModel::find($id);
+        return view('matakuliah.detail', compact('matakuliah'));
+    }
+
     public function edit($id)
     {
         $matkul = MataKuliahModel::where('id_matkul', '=', 1)->get()[0];
-        return view('tes.create_matkul', ['urlform' => url("/matkul/" . $id), 'matkul' => $matkul]);
+        return view('mataKuliah.create_mataKuliah', ['urlform' => url("/matkul/" . $id), 'matkul' => $matkul]);
     }
 
     public function update(Request $request,  $id)
     {
         $request->validate([
-            'kode_matkul' => 'required|string|max:5',
-            'matakuliah' => 'required|string|max:30',
-            'pengajar' => 'required|string|max:30',
+            'nama_matkul' => 'required|string|max:30|unique:matakuliah,id,'.$id,
+            'sks' => 'required|integer',
+            'jam' => 'required|integer',
+            'semester' => 'required|string|max:12',
         ]);
 
         $requestData = $request->except(['_token', '_method']);

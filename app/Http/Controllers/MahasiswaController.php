@@ -3,17 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Models\MahasiswaModel;
-use GrahamCampbell\ResultType\Success;
+use App\Models\Kelas;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rules\Unique;
 
 class MahasiswaController extends Controller
 {
     public function index()
     {
-        $mahasiswa = MahasiswaModel::all();
-        return view('P6.mahasiswa')
-            ->with('mhs', $mahasiswa);
+        // $mahasiswa = MahasiswaModel::all();
+        // return view('P6.mahasiswa')
+        //     ->with('mhs', $mahasiswa);
+
+        //yang semula Mahasiswa::all, diubah menjadi with() menyatakan relasi
+        $mahasiswa = MahasiswaModel::with('kelas')->get();
+        $paginate = MahasiswaModel::orderBy('id', 'asc')->paginate(3);
+        return view('P6.mahasiswa',['mhs'=>$mahasiswa,'paginate'=>$paginate])
+        ->with('mhs', $mahasiswa);
     }
 
     /**
@@ -23,8 +28,10 @@ class MahasiswaController extends Controller
      */
     public function create()
     {
-        return view('mahasiswa.create_mahasiswa')
-            ->with('url_form', url('/mahasiswa'));
+        // return view('mahasiswa.create_mahasiswa')
+        //     ->with('url_form', url('/mahasiswa'));
+        $kelas =Kelas::all();//mendapatkan data dari tabel kelas
+        return view('mahasiswa.create_mahasiswa',['kelas' => $kelas, 'url_form'=>route('mahasiswa.store')]);
     }
 
     /**
@@ -39,16 +46,32 @@ class MahasiswaController extends Controller
         $request->validate([
             'nim'=>'required|string|max:10|unique:mahasiswas,nim',
             'nama'=>'required|string|max:50',
-            'jk'=>'required|in:1,p',
+            'jk'=>'required|in:l,p',
             'tempat_lahir'=>'required|string|max:50',
             'tanggal_lahir'=>'required|date',
             'alamat'=>'required|string|max:225',
             'hp'=>'required|digits_between:6,15',
+            'kelas_id'=>'required'
         ]);
 
-        $data = MahasiswaModel::create($request->except(['_token']));
+        $mhs = new MahasiswaModel();
+        $mhs->nim=$request->get('nim');
+        $mhs->nama=$request->get('nama');
+        $mhs->jk=$request->get('jk');
+        $mhs->tempat_lahir=$request->get('tempat_lahir');
+        $mhs->tanggal_lahir=$request->get('tanggal_lahir');
+        $mhs->alamat=$request->get('alamat');
+        $mhs->hp=$request->get('hp');
+        $mhs->save();
+
+        $kelas = new Kelas();
+        $kelas->id = $request->get('kelas_id');
+
+        $mhs->kelas()->associate($kelas);
+        $mhs->save();
+
         //jika data berhasil ditambahkan, akan kembali ke halaman utama
-        return redirect('mahasiswa')
+        return redirect()->route('mahasiswa')
             ->with('success','Mahasiswa Berhasil ditambahkan');
         }
 
@@ -58,9 +81,10 @@ class MahasiswaController extends Controller
      * @param  \App\Models\Mahasiswa  $mahasiswa
      * @return \Illuminate\Http\Response
      */
-    public function show(MahasiswaModel $mahasiswa)
+    public function show($id)
     {
-        //
+        $mahasiswa = MahasiswaModel::with('kelas')->where('id', $id)->first();
+        return view('mahasiswa.detail', ['mhs'=>$mahasiswa]);
     }
 
     /**
@@ -71,8 +95,10 @@ class MahasiswaController extends Controller
      */
     public function edit($id)
     {
+        $kls = Kelas::all();
         $mahasiswa =MahasiswaModel::find($id);
         return view('mahasiswa.create_mahasiswa')
+                    ->with('kelas', $kls)
                     ->with('mhs',$mahasiswa)
                     ->with('url_form', url('/mahasiswa/'. $id));
     }
@@ -87,9 +113,9 @@ class MahasiswaController extends Controller
     public function update(Request $request, $id)
     {
                 $request->validate([
-            'nim'=>'required|string|max:10|unique:mahasiswas,nim',
+            'nim'=>'required|string|max:10|unique:mahasiswas,nim,'.$id,
             'nama'=>'required|string|max:50',
-            'jk'=>'required|in:1,p',
+            'jk'=>'required|in:l,p',
             'tempat_lahir'=>'required|string|max:50',
             'tanggal_lahir'=>'required|date',
             'alamat'=>'required|string|max:225',
@@ -114,5 +140,5 @@ class MahasiswaController extends Controller
         return redirect('mahasiswa')
         ->with('success', 'Mahasiswa Berhasil Dihapus');
     }
-    
+
 }
