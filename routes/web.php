@@ -101,12 +101,18 @@ Route::get('/tes', function(){
 
 Route::middleware(['auth'])->group(function(){
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
-    Route::get('/article/{id}', [ArticleController::class, 'index']);
+    // Route::get('/article/{id}', [ArticleController::class, 'index']);
     Route::resource('/hobi', HobiModelController::class)->name('index','hobi');
     Route::resource('/keluarga', KeluargaModelController::class)->parameter('keluarga','id')->name('index','kel');
     Route::resource('/matkul', MataKuliahController::class);
     Route::resource('/mahasiswa', MahasiswaController::class)->name('index','mahasiswa');
     Route::resource('/mahasiswamatakuliah', MahasiswaMatakuliahController::class);
+
+    //upload
+    Route::get('/articles/cetak_pdf', [ArticleController::class, 'cetak_pdf']);
+
+    Route::resource('articles', ArticleController::class);
+    //cetakpdf
 
 
     // Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
