@@ -20,6 +20,7 @@ use App\Http\Controllers\MahasiswaMatakuliahController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\MataKuliahController;
 use App\Http\Controllers\MobilController;
+use App\Models\MahasiswaMatakuliah;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 // use App\Http\Controllers\PageController;
@@ -114,6 +115,7 @@ Route::middleware(['auth'])->group(function(){
     Route::resource('articles', ArticleController::class);
     //cetakpdf
 
+    Route::get('/cetaknilai_pdf{id}', [MahasiswaController::class, 'cetak_pdf'])->name('cetak_nilai');
 
     // Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
     Route::get('/ex', [ExperienceController::class, 'index'])->name('pengalaman');

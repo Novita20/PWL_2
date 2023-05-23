@@ -36,6 +36,11 @@
                 </div>
             </div>
             <div class="card-body">
+                @if ($message = Session::get('success'))
+                <div class="alert alert-success">
+                <p>{{ $message }}</p>
+                </div>
+         @endif
 
           <a href="{{url('mahasiswa/create')}}" class="btn btn-sm btn-success my-2">Tambah Data</a>
 
@@ -45,6 +50,7 @@
                 <th>No</th>
                 <th>NIM</th>
                 <th>Nama</th>
+                <th>Foto</th>
                 <th>Kelas</th>
                 <th>Jenis Kelamin</th>
                 <th>Tempat lahir</th>
@@ -61,6 +67,11 @@
                     <td>{{++$i}}</td>
                     <td>{{$m->nim}}</td>
                     <td>{{$m->nama}}</td>
+                    <td>
+                        @if($m->foto)
+                            <img style="max-width:100px;max-height:100px" src="{{url('storage').'/'.$m->foto}}"/>
+                        @endif
+                    </td>
                     <td>{{$m->jk}}</td>
                     <td>{{$m->tempat_lahir}}</td>
                     <td>{{$m->tanggal_lahir}}</td>

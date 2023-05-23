@@ -47,13 +47,13 @@ class MahasiswaMatakuliahController extends Controller
      */
     public function show($id)
     {
-        $mhs_nilai = MahasiswaMatakuliah::where('mahasiswa_id', $id)->get();
+        $nilai = MahasiswaMatakuliah::where('mahasiswa_id', $id)->get();
         $mhs = MahasiswaModel::where('id', $id)->first();
         $mahasiswamatakuliah = MahasiswaMatakuliah::with('mahasiswa', 'matakuliah')->where('mahasiswa_id',  $id)->get();
         return view('mahasiswa.nilai')
             ->with('mhs', $mhs)
             ->with('mhsmatkul', $mahasiswamatakuliah)
-            ->with('nilai', $mhs_nilai);
+            ->with('nilai', $nilai);
     }
     /**
      * Show the form for editing the specified resource.

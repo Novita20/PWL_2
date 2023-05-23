@@ -29,7 +29,7 @@
       <form action="{{ url('/login') }}" method="post">
         @csrf
         <div class="input-group mb-3">
-          <input name="username" type="text" form-control" placeholder="Email">
+          <input name="username" type="text" class="form-control" placeholder="Username">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -37,7 +37,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input name="password" type="Password">
+          <input name="password" type="Password" class="form-control">
 
 
           <div class="input-group-append">

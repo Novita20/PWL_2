@@ -41,8 +41,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @if ($mahasiswa->count() > 0)
-                                @foreach ($mahasiswa as $i)
+                            @if ($mhsmatkul->count() > 0)
+                                @foreach ($mhsmatkul as $i)
                                     <tr>
                                         <td>{{ $i->matakuliah->nama_matkul }}</td>
                                         <td>{{ $i->matakuliah->sks }}</td>
@@ -59,6 +59,10 @@
                             @endif
                         </tbody>
                     </table>
+                    <div class="card-body">
+                        <div class="float-right my-2">
+                            <a href="{{ route('cetak_nilai', $mhs->id) }}" class="btn btn-sm btn-danger my-2">Cetak PDF</a>
+                        </div>
                     <div class="card-body">
                         <a class="btn btn-success mt3" href="{{ route('mahasiswa') }}">Kembali</a>
                     </div>

@@ -10,6 +10,13 @@ Detail Mahasiswa
 <ul class="list-group list-group-flush">
 <li class="list-group-item"><b>Nim: </b>{{$mhs->nim}}</li>
 <li class="list-group-item"><b>Nama: </b>{{$mhs->nama}}</li>
+<li class="list-group-item"><b>Foto: </b><br>
+    @if ($mhs->foto)
+        <img style="max-width:100px;max-height:100px" src="{{url('storage').'/'.$mhs->foto}}" />
+    @else
+        Foto tidak tersedia
+    @endif
+</li>
 <li class="list-group-item"><b>Kelas: </b>{{$mhs->kelas->nama_kelas}}</li>
 <li class="list-group-item"><b>JK: </b> @if($mhs->jk=='p')
     Perempuan

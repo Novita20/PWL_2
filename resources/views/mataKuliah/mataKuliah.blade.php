@@ -47,18 +47,18 @@
                         <th>action</th>
 
                     </tr>
-                    @foreach ($mk as $id => $k)
+                    @foreach ($mhs as $id => $m)
                     <tr>
-                        <td>{{$k->id}}</td>
-                        <td>{{$k->nama_matkul}}</td>
-                        <td>{{$k->sks}}</td>
-                        <td>{{$k->jam}}</td>
-                        <td>{{$k->semester}}</td>
+                        <td>{{$m->id}}</td>
+                        <td>{{$m->nama_matkul}}</td>
+                        <td>{{$m->sks}}</td>
+                        <td>{{$m->jam}}</td>
+                        <td>{{$m->semester}}</td>
                         <td>
                         <!-- Bikin tombol edit dan delete -->
-                        <a href="{{ url('/matkul/'. $k->id.'/edit') }}" class="btn btn-sm btn-warning">edit</a>
+                        <a href="{{ url('/matkul/'. $m->id.'/edit') }}" class="btn btn-sm btn-warning">edit</a>
 
-                        <form method="POST" action="{{ url('/matkul/'.$k->id) }}" >
+                        <form method="POST" action="{{ url('/matkul/'.$m->id) }}" >
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-sm btn-danger">hapus</button>
