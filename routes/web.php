@@ -107,6 +107,7 @@ Route::middleware(['auth'])->group(function(){
     Route::resource('/keluarga', KeluargaModelController::class)->parameter('keluarga','id')->name('index','kel');
     Route::resource('/matkul', MataKuliahController::class);
     Route::resource('/mahasiswa', MahasiswaController::class)->name('index','mahasiswa');
+    Route::post('/mahasiswa/data', [MahasiswaController::class, 'data']);
     Route::resource('/mahasiswamatakuliah', MahasiswaMatakuliahController::class);
 
     //upload
@@ -124,6 +125,8 @@ Route::middleware(['auth'])->group(function(){
     // Route::get("/kel", [KeluargaModelController::class, 'index'])->name('kel');
     // Route::get("/mk", [MataKuliahModelController::class, 'index'])->name('mk');
     Route::resource('/mobil', MobilController::class);
+
+
     });
 
 
